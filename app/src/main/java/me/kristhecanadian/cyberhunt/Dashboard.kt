@@ -30,6 +30,7 @@ class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // create a binding with fragment home
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
