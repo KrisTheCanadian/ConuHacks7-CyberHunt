@@ -22,4 +22,9 @@
         android:name="me.kristhecanadian.cyberhunt.ui.ar.ArFragment"
         android:label="@string/title_ar"
         tools:layout="@layout/fragment_ar" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_map"-->
+<!--        android:name="me.kristhecanadian.cyberhunt.ui.map.MapFragment"-->
+<!--        android:label="@string/map"-->
+<!--        tools:layout="@layout/fragment_map" />-->
 </navigation>
