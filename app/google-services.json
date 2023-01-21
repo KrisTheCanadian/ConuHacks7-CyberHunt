@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "143086746265",
-    "firebase_url": "https://ar-gooutside-357-default-rtdb.firebaseio.com",
-    "project_id": "ar-gooutside-357",
-    "storage_bucket": "ar-gooutside-357.appspot.com"
+    "project_number": "1029350913513",
+    "project_id": "cyberhunt-df998",
+    "storage_bucket": "cyberhunt-df998.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:143086746265:android:5311358fe6ea03893c1608",
+        "mobilesdk_app_id": "1:1029350913513:android:8acecec46309b4a8dec778",
         "android_client_info": {
-          "package_name": "me.kristhecanadian.gooutside"
+          "package_name": "me.kristhecanadian.cyberhunt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "143086746265-gdt3tjs9feshv7pjs0omf6at74kvkgii.apps.googleusercontent.com",
+          "client_id": "1029350913513-6dilmf3v4gp84r3qak82usiht1duq6na.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kristhecanadian.cyberhunt",
+            "certificate_hash": "b7b1a69999676a8bd19c5c0da1673770cccd82ba"
+          }
+        },
+        {
+          "client_id": "1029350913513-e548apu22ce076g0a4ef6idsu657hbfs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyClJQCtDA45M3I4THiGAKqTTRhdRc_8yIU"
+          "current_key": "AIzaSyBU8G_U_zrE-pSDVZg6YWPjzpNRXMKbL28"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "143086746265-gdt3tjs9feshv7pjs0omf6at74kvkgii.apps.googleusercontent.com",
+              "client_id": "1029350913513-e548apu22ce076g0a4ef6idsu657hbfs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
