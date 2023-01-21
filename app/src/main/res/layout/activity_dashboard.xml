@@ -33,25 +33,14 @@
         app:navGraph="@navigation/mobile_navigation" />
 
     <Button
-        android:id="@+id/signin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/nav_host_fragment_activity_dashboard"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/signout"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment_activity_dashboard"
         app:layout_constraintStart_toStartOf="@+id/nav_host_fragment_activity_dashboard"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment_activity_dashboard" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

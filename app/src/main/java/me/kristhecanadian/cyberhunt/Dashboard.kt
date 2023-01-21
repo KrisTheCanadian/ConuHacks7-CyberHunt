@@ -27,10 +27,6 @@ class Dashboard : AppCompatActivity() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
-    companion object {
-        private const val RC_SIGN_IN = 120
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,10 +55,6 @@ class Dashboard : AppCompatActivity() {
         // Build a GoogleSignInClient with the options specified by gso.
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding.signin.setOnClickListener {
-            signIn()
-        }
-
         binding.signout.setOnClickListener {
             // sign out the user
             googleSignInClient.signOut()
@@ -74,8 +66,6 @@ class Dashboard : AppCompatActivity() {
 
         // check if the user is signed in
         if (GoogleSignIn.getLastSignedInAccount(this) != null) {
-            // the user is signed in
-            binding.signin.visibility = View.GONE
             // make the sign out button visible
             binding.signout.visibility = View.VISIBLE
 
@@ -89,61 +79,19 @@ class Dashboard : AppCompatActivity() {
             }
 
         } else {
-            // the user is not signed in
-            binding.signin.visibility = View.VISIBLE
-            // Configure sign-in to request the user's ID, email address, and basic
-
-
-            binding.signin.setOnClickListener {
-                signIn()
-            }
-
-            // Check for existing Google Sign In account, if the user is already signed in
-            // the GoogleSignInAccount will be non-null.
-            val account = GoogleSignIn.getLastSignedInAccount(this)
-            updateUI(account)
+            // bring user back to landing page
+            startActivity(Intent(this, Landing::class.java))
         }
 
-    }
-
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
-    }
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account = completedTask.getResult(ApiException::class.java)
-            // Signed in successfully, update UI with the signed-in user's information
-            updateUI(account)
-        } catch (e: ApiException) {
-            // Sign in failed, update UI appropriately
-            Log.w(TAG, "signInResult:failed code=" + e.statusCode)
-            updateUI(null)
-        }
     }
 
     private fun updateUI(account: GoogleSignInAccount?) {
         if (account != null) {
             val intent = Intent(this, Dashboard::class.java)
-            // make the sign in button invisible
-            binding.signin.visibility = View.INVISIBLE
             startActivity(intent)
         } else {
-            // make the sign in button visible
-            binding.signin.visibility = View.VISIBLE
-            // make the sign out button invisible
-            binding.signout.visibility = View.INVISIBLE
+            val intent = Intent(this, Landing::class.java)
+            startActivity(intent)
         }
     }
 }
