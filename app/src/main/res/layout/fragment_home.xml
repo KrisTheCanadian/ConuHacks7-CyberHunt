@@ -1,0 +1,36 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.kristhecanadian.cyberhunt.ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/lets_go_exp2"
+        android:layout_width="160dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="top"
+        android:text="@string/cyberhunt"
+        android:textAppearance="@style/lets_go_exp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="56dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="32dp"
+        android:src="@mipmap/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

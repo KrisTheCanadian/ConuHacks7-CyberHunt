@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+Properties properties = new Properties()
+properties.load(new FileInputStream(rootProject.file("local.properties")))
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "me.kristhecanadian.cyberhunt"
+        minSdkVersion 31
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue("string", "googleMapApiKey", properties['googleMapApiKey'])
+    }
+
+    // Sceneform libraries use language constructs from Java 8.
+    // Add these compile options if targeting minSdkVersion < 26.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    // AR CORE
+    implementation 'com.google.ar:core:1.35.0'
+
+    // 3D models
+    implementation 'com.google.ar.sceneform:assets:1.17.1'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Android
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // ARCore
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.17.1'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.7.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.7.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.4.1"
+
+    // Maps & Location
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:maps-utils-ktx:0.2'
+
+    // okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.4.1'
+}
