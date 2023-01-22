@@ -14,13 +14,13 @@
 
 package me.kristhecanadian.cyberhunt.api
 
-import me.kristhecanadian.cyberhunt.model.Place
+import me.kristhecanadian.cyberhunt.model.Clues
 import com.google.gson.annotations.SerializedName
 
 /**
  * Data class encapsulating a response from the nearby search call to the Places API.
  */
 data class NearbyPlacesResponse(
-   @SerializedName("results") val results: List<Place>
+   @SerializedName("results") val results: List<Clues>
 )
 

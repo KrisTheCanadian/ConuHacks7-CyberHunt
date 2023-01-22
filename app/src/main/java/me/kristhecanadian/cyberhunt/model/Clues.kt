@@ -23,14 +23,14 @@ import kotlin.math.sin
 /**
  * A model describing details about a Place (location, name, type, etc.).
  */
-data class Place(
+data class Clues(
     val id: String,
     val icon: String,
     val name: String,
     val geometry: Geometry
 ) {
     override fun equals(other: Any?): Boolean {
-        if (other !is Place) {
+        if (other !is Clues) {
             return false
         }
         return this.id == other.id
@@ -41,7 +41,7 @@ data class Place(
     }
 }
 
-fun Place.getPositionVector(azimuth: Float, latLng: LatLng): Vector3 {
+fun Clues.getPositionVector(azimuth: Float, latLng: LatLng): Vector3 {
     val placeLatLng = this.geometry.location.latLng
     val heading = latLng.sphericalHeading(placeLatLng)
     val r = -2f

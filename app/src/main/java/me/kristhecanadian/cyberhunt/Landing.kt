@@ -37,11 +37,12 @@ class Landing : AppCompatActivity() {
             .requestEmail()
             .build()
 
+
         // Build a GoogleSignInClient with the options specified by gso.
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding.signin.setOnClickListener {
-            signIn()
+        binding.signinGoogle.setOnClickListener {
+            signInWithGoogle()
         }
 
         // if the user is already signed in, send them to the dashboard
@@ -74,10 +75,14 @@ class Landing : AppCompatActivity() {
             // Sign in failed, update UI appropriately
             Log.w(ContentValues.TAG, "signInResult:failed code=" + e.statusCode)
             // keep the user on the landing page
+
+            // TODO: REMOVE THIS FROM PRODUCTION
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
         }
     }
 
-    private fun signIn() {
+    private fun signInWithGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }

@@ -20,12 +20,12 @@ import android.widget.TextView
 import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.rendering.ViewRenderable
 import me.kristhecanadian.cyberhunt.R
-import me.kristhecanadian.cyberhunt.model.Place
+import me.kristhecanadian.cyberhunt.model.Clues
 
 
-class PlaceNode(
+class ClueNode(
     val context: Context,
-    val place: Place?
+    val place: Clues?
 ) : Node() {
 
     private var placeRenderable: ViewRenderable? = null
@@ -51,7 +51,7 @@ class PlaceNode(
 
                 place?.let {
                     textViewPlace = renderable.view.findViewById(R.id.placeName)
-                    textViewPlace?.text = it.name
+                    textViewPlace?.text = "Email Phishing"
                 }
             }
     }
@@ -64,9 +64,9 @@ class PlaceNode(
 
         // Hide text for other nodes
         this.parent?.children?.filter {
-            it is PlaceNode && it != this
+            it is ClueNode && it != this
         }?.forEach {
-            (it as PlaceNode).textViewPlace?.visibility = View.GONE
+            (it as ClueNode).textViewPlace?.visibility = View.GONE
         }
     }
 

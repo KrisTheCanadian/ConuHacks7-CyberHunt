@@ -28,10 +28,10 @@ import com.google.ar.sceneform.AnchorNode
 import me.kristhecanadian.cyberhunt.R
 import me.kristhecanadian.cyberhunt.api.NearbyPlacesResponse
 import me.kristhecanadian.cyberhunt.api.PlacesService
-import me.kristhecanadian.cyberhunt.ar.PlaceNode
+import me.kristhecanadian.cyberhunt.ar.ClueNode
 import me.kristhecanadian.cyberhunt.ar.PlacesArFragment
 import me.kristhecanadian.cyberhunt.databinding.FragmentArBinding
-import me.kristhecanadian.cyberhunt.model.Place
+import me.kristhecanadian.cyberhunt.model.Clues
 import me.kristhecanadian.cyberhunt.model.getPositionVector
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,7 +57,7 @@ class ArFragment : Fragment(), SensorEventListener {
 
     private var anchorNode: AnchorNode? = null
     private var markers: MutableList<Marker> = emptyList<Marker>().toMutableList()
-    private var places: List<Place>? = null
+    private var totalClues: List<Clues>? = null
     private var currentLocation: Location? = null
     private var map: GoogleMap? = null
 
@@ -118,30 +118,31 @@ class ArFragment : Fragment(), SensorEventListener {
             val anchor = hitResult.createAnchor()
             anchorNode = AnchorNode(anchor)
             anchorNode?.setParent(arFragment.arSceneView.scene)
-            addPlaces(anchorNode!!)
+
+            addClues(anchorNode!!)
         }
     }
 
-    private fun addPlaces(anchorNode: AnchorNode) {
+    private fun addClues(anchorNode: AnchorNode) {
         val currentLocation = currentLocation
         if (currentLocation == null) {
             Log.w(TAG, "Location has not been determined yet")
             return
         }
 
-        val places = places
-        if (places == null) {
-            Log.w(TAG, "No places to put")
+        val cluesList = totalClues
+        if (cluesList == null) {
+            Log.w(TAG, "No clues to put")
             return
         }
 
-        for (place in places) {
+        for (clues in cluesList ) {
             // Add the place in AR
-            val placeNode = PlaceNode(requireActivity().applicationContext, place)
+            val placeNode = ClueNode(requireActivity().applicationContext, clues)
             placeNode.setParent(anchorNode)
-            placeNode.localPosition = place.getPositionVector(orientationAngles[0], currentLocation.latLng)
+            placeNode.localPosition = clues.getPositionVector(orientationAngles[0], currentLocation.latLng)
             placeNode.setOnTapListener { _, _ ->
-                showInfoWindow(place)
+                showInfoWindow(clues)
             }
 
 
@@ -149,10 +150,10 @@ class ArFragment : Fragment(), SensorEventListener {
             map?.let {
                 val marker = it.addMarker(
                     MarkerOptions()
-                        .position(place.geometry.location.latLng)
-                        .title(place.name)
+                        .position(clues.geometry.location.latLng)
+                        .title(clues.name)
                 )
-                marker?.tag = place
+                marker?.tag = clues
                 if (marker != null) {
                     markers.add(marker)
                 }
@@ -160,17 +161,17 @@ class ArFragment : Fragment(), SensorEventListener {
         }
     }
 
-    private fun showInfoWindow(place: Place) {
+    private fun showInfoWindow(place: Clues) {
         // Show in AR
-        val matchingPlaceNode = anchorNode?.children?.filterIsInstance<PlaceNode>()?.first {
-            val otherPlace = (it as PlaceNode).place ?: return@first false
+        val matchingPlaceNode = anchorNode?.children?.filterIsInstance<ClueNode>()?.first {
+            val otherPlace = (it as ClueNode).place ?: return@first false
             return@first otherPlace == place
-        } as? PlaceNode
+        } as? ClueNode
         matchingPlaceNode?.showInfoWindow()
 
         // Show as marker
         val matchingMarker = markers.firstOrNull {
-            val placeTag = (it.tag as? Place) ?: return@firstOrNull false
+            val placeTag = (it.tag as? Clues) ?: return@firstOrNull false
             return@firstOrNull placeTag == place
         }
         matchingMarker?.showInfoWindow()
@@ -204,7 +205,7 @@ class ArFragment : Fragment(), SensorEventListener {
             }
             googleMap.setOnMarkerClickListener { marker ->
                 val tag = marker.tag
-                if (tag !is Place) {
+                if (tag !is Clues) {
                     return@setOnMarkerClickListener false
                 }
                 showInfoWindow(tag)
@@ -241,12 +242,11 @@ class ArFragment : Fragment(), SensorEventListener {
     }
 
     private fun getNearbyPlaces(location: Location) {
-        // TODO CHANGE THESES PLACES FROM GOOGLE MAPS TO FIREBASE LOCATIONS
         val apiKey = resources.getString(R.string.googleMapApiKey)
         placesService.nearbyPlaces(
             apiKey = apiKey,
             location = "${location.latitude},${location.longitude}",
-            radiusInMeters = 200,
+            radiusInMeters = 500,
             placeType = "park"
         ).enqueue(
             object : Callback<NearbyPlacesResponse> {
@@ -264,27 +264,11 @@ class ArFragment : Fragment(), SensorEventListener {
                     }
 
                     val places = response.body()?.results ?: emptyList()
-                    this@ArFragment.places = places
+                    this@ArFragment.totalClues = places
                 }
             }
         )
     }
-
-//    private fun isSupportedDevice(): Boolean {
-//        val availability = ArCoreApk.getInstance().checkAvailability(this)
-//        if (!availability.isSupported) {
-//            return false
-//        }
-//        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-//        val openGlVersionString = activityManager.deviceConfigurationInfo.glEsVersion
-//        if (openGlVersionString.toDouble() < 3.0) {
-//            Toast.makeText(this, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG)
-//                .show()
-//            finish()
-//            return false
-//        }
-//        return true
-//    }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
