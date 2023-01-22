@@ -27,4 +27,5 @@
     <string name="image">image</string>
     <string name="my_collection">My Collection</string>
     <string name="title_activity_quiz">Quiz</string>
+    <string name="Welcome_Back">Welcome Back!</string>
 </resources>
