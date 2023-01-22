@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <string name="app_name">GoOutside</string>
+    <string name="app_name">CyberHunt</string>
     <string name="cyberhunt">CyberHunt</string>
     <string name="logo">logo</string>
     <string name="title_activity_dashboard">dashboard</string>
