@@ -30,24 +30,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <TextView
-        android:id="@+id/lets_go_exp5"
-        android:layout_width="151dp"
-        android:layout_height="56dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="233dp"
-        android:fontFamily="sans-serif-black"
-        android:gravity="top"
-        android:text="Bob Smith"
-        android:textAppearance="@style/lets_go_exp"
-        android:textSize="26sp"
-        android:textColor="#222"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment_activity_dashboard"
-        app:layout_constraintVertical_bias="0.075" />
-
     <Button
         android:id="@+id/signout"
         android:layout_width="wrap_content"
@@ -64,59 +46,9 @@
         app:layout_constraintTop_toTopOf="@+id/nav_host_fragment_activity_dashboard"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="165dp" />
 
-    <TextView
-        android:id="@+id/lets_go_exp4"
-        android:layout_width="237dp"
-        android:layout_height="48dp"
-        android:layout_alignParentTop="true"
-        android:fontFamily="sans-serif-black"
-        android:gravity="top"
-        android:text="@string/Welcome_Back"
-        android:textAppearance="@style/lets_go_exp"
-        android:textColor="#888"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="148dp"
-        android:layout_height="148dp"
-        app:srcCompat="@drawable/lock2"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="437dp" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="187dp"
-        android:layout_height="150dp"
-        android:text="Solve clues, complete challenges and learn how to stay cyber-safe with our interactive AR scavenger hunt game"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="183dp"
-        tools:layout_editor_absoluteY="461dp" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="259dp"
-        android:layout_height="68dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:srcCompat="@drawable/score"
-        tools:layout_editor_absoluteY="242dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

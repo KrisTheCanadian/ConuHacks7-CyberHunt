@@ -5,32 +5,118 @@
     android:layout_height="match_parent"
     tools:context="me.kristhecanadian.cyberhunt.ui.home.HomeFragment">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="56dp"
+        android:layout_height="76dp"
+        android:src="@mipmap/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
+
     <TextView
         android:id="@+id/lets_go_exp2"
         android:layout_width="160dp"
         android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="top"
         android:text="@string/cyberhunt"
         android:textAppearance="@style/lets_go_exp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
+
+
+    <TextView
+        android:id="@+id/lets_go_exp4"
+        android:layout_width="237dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:fontFamily="sans-serif-black"
+        android:gravity="top"
+        android:text="@string/Welcome_Back"
+        android:textAppearance="@style/lets_go_exp"
+        android:textColor="#888"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/lets_go_exp5"
+        android:layout_width="151dp"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:fontFamily="sans-serif-black"
+        android:gravity="top"
+        android:text="Bob Smith"
+        android:textAppearance="@style/lets_go_exp"
+        android:textColor="#222"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.477" />
+
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="56dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="32dp"
-        android:src="@mipmap/logo"
+        android:id="@+id/imageView8"
+        android:layout_width="259dp"
+        android:layout_height="68dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="1.0"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.467"
+        app:srcCompat="@drawable/score" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="195dp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="148dp"
+        android:layout_height="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79"
+        app:srcCompat="@drawable/lock2" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="187dp"
+        android:layout_height="150dp"
+        android:text="Solve clues, complete challenges and learn how to stay cyber-safe with our interactive AR scavenger hunt game"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.793" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
