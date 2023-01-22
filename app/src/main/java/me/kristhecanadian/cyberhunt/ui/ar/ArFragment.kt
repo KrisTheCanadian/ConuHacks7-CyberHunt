@@ -1,7 +1,9 @@
 package me.kristhecanadian.cyberhunt.ui.ar
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -30,6 +32,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.ar.core.Pose
 import com.google.ar.sceneform.AnchorNode
+import me.kristhecanadian.cyberhunt.Quiz
 import me.kristhecanadian.cyberhunt.R
 import me.kristhecanadian.cyberhunt.api.NearbyPlacesResponse
 import me.kristhecanadian.cyberhunt.api.PlacesService
@@ -39,6 +42,7 @@ import me.kristhecanadian.cyberhunt.databinding.FragmentArBinding
 import me.kristhecanadian.cyberhunt.model.Clues
 import me.kristhecanadian.cyberhunt.model.GeometryLocation
 import me.kristhecanadian.cyberhunt.model.getPositionVector
+import me.kristhecanadian.cyberhunt.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,11 +75,17 @@ class ArFragment : Fragment(), SensorEventListener {
 
     private var hasBeenInitialized = false
 
+    private var scores = arrayListOf<Int>()
+
+    private var quizNumber = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
 
         val viewOfLayout = inflater.inflate(R.layout.fragment_ar, container, false)
 
@@ -91,6 +101,8 @@ class ArFragment : Fragment(), SensorEventListener {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        readClues()
 
         // check for user movement and update the ar scene
         if (ActivityCompat.checkSelfPermission(
@@ -188,6 +200,34 @@ class ArFragment : Fragment(), SensorEventListener {
         }
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val score = data?.getIntExtra("SCORE", 0)
+            Log.d(TAG, "Score: $score")
+
+            // remove the clue from the list
+            markers.remove(markers[0])
+
+            // remove the node from the scene
+            anchorNode?.removeChild(anchorNode?.children?.get(0))
+
+            // if there are no more clues, end the game
+            if (markers.isEmpty()) {
+                Log.d(TAG, "No more clues")
+                val intent = Intent(requireContext(), HomeFragment::class.java)
+                // create a toast saying the game is over
+                Toast.makeText(
+                    requireContext(),
+                    "Game Over! You got completed all the challenges! Try again later!",
+                    Toast.LENGTH_LONG
+                ).show()
+                startActivity(intent)
+            }
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
@@ -197,6 +237,12 @@ class ArFragment : Fragment(), SensorEventListener {
         arFragment.setOnTapArPlaneListener { hitResult, _, _ ->
             if(hasBeenInitialized) {
                 Log.d(TAG, "Clues already planted")
+                // create a toast saying that the clues have already been planted
+                Toast.makeText(
+                    requireContext(),
+                    "Clues are already placed!",
+                    Toast.LENGTH_LONG
+                ).show()
                 return@setOnTapArPlaneListener
             }
 
@@ -244,7 +290,11 @@ class ArFragment : Fragment(), SensorEventListener {
                 node.setOnTapListener { _, _ ->
                     showInfoWindow(clues)
                     // TODO: add the clue to the list of found clues
-                    Toast.makeText(context, "3D model clicked", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Opening Challenge!", Toast.LENGTH_SHORT).show()
+
+                    // create an intent to go to to the quiz activity
+                    val intent = Intent(context, Quiz::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -262,6 +312,28 @@ class ArFragment : Fragment(), SensorEventListener {
                     markers.add(marker)
                 }
             }
+        }
+    }
+
+    private fun readClues() {
+        val sharedPref = this.activity?.getSharedPreferences("cyberhunt", Context.MODE_PRIVATE)
+        val size = sharedPref?.getInt("size", 0)
+        val score = sharedPref?.getInt("quiz$quizNumber", -1)
+        if (size != null) {
+            if((score != -1) && (score != null) && (size > quizNumber)) {
+                scores.add(score)
+                quizNumber = scores.size
+                // create a toast saying congrats on completing the quiz
+                Toast.makeText(
+                    requireContext(),
+                    "Congratulations! You passed the quiz! You got $score out of 5!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        if(score == null){
+            Log.d(TAG, "Score is null")
         }
     }
 
