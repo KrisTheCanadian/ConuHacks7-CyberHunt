@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -242,6 +243,8 @@ class ArFragment : Fragment(), SensorEventListener {
                 node.localPosition = clues.getPositionVector(orientationAngles[0], currentLocation.latLng)
                 node.setOnTapListener { _, _ ->
                     showInfoWindow(clues)
+                    // TODO: add the clue to the list of found clues
+                    Toast.makeText(context, "3D model clicked", Toast.LENGTH_SHORT).show()
                 }
             }
 
