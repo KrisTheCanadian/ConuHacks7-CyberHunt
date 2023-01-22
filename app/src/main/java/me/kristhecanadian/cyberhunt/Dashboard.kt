@@ -79,10 +79,10 @@ class Dashboard : AppCompatActivity() {
                     }
             }
 
-        } else {
-            // bring user back to landing page
-            startActivity(Intent(this, Landing::class.java))
         }
+
+        // TODO REMOVE
+        binding.signout.visibility = View.INVISIBLE
 
     }
 
