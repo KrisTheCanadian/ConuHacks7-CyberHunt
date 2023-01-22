@@ -5,38 +5,285 @@
     android:layout_height="match_parent"
     tools:context="me.kristhecanadian.cyberhunt.ui.dashboard.DashboardFragment">
 
-    <TextView
-        android:id="@+id/lets_go_exp"
-        android:layout_width="160dp"
-        android:layout_height="24dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="sans-serif-black"
-        android:gravity="top"
-        android:text="@string/my_collection"
-        android:textAppearance="@style/lets_go_exp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="392dp"
+        android:layout_height="692dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.233" />
+        tools:context="me.kristhecanadian.cyberhunt.ui.badges.BadgesFragment"
+        tools:layout_editor_absoluteY="39dp">
+        tools:layout_editor_absoluteY="0dp">
 
-    <TextView
-        android:id="@+id/lets_go_exp2"
-        android:layout_width="160dp"
-        android:layout_height="24dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="top"
-        android:text="@string/cyberhunt"
-        android:textAppearance="@style/lets_go_exp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="528dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+
+            <ImageView
+                android:id="@+id/imageView46"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="418dp">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="310dp">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+
+            <ImageView
+                android:id="@+id/imageView48"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="319dp"
+            tools:layout_editor_absoluteY="201dp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="201dp">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+
+            <ImageView
+                android:id="@+id/imageView50"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="201dp">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+
+            <ImageView
+                android:id="@+id/imageView51"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/lets_go_exp"
+            android:layout_width="160dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="sans-serif-black"
+            android:gravity="top"
+            android:text="@string/my_collection"
+            android:textAppearance="@style/lets_go_exp"
+            tools:layout_editor_absoluteX="25dp"
+            tools:layout_editor_absoluteY="143dp" />
+
+        <TextView
+            android:id="@+id/lets_go_exp2"
+            android:layout_width="160dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="79dp"
+            android:layout_marginBottom="59dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="top"
+            android:text="@string/cyberhunt"
+            android:textAppearance="@style/lets_go_exp"
+            app:layout_constraintBottom_toTopOf="@+id/lets_go_exp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7"
+            tools:layout_editor_absoluteX="105dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="65dp"
+            android:layout_height="75dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            tools:layout_editor_absoluteX="211dp"
+            tools:layout_editor_absoluteY="201dp">
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:background="#808080"
+                android:src="@mipmap/collection_locked"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.318"
+                app:srcCompat="@mipmap/logo" />
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView6"
@@ -48,134 +295,6 @@
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView25"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
-
-    <ImageView
-        android:id="@+id/imageView28"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <ImageView
-        android:id="@+id/imageView29"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <ImageView
-        android:id="@+id/imageView30"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <ImageView
-        android:id="@+id/imageView31"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
-
-    <ImageView
-        android:id="@+id/imageView32"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
-
-    <ImageView
-        android:id="@+id/imageView33"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
-
-    <ImageView
-        android:id="@+id/imageView26"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
-
-    <ImageView
-        android:id="@+id/imageView27"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
-
-    <ImageView
-        android:id="@+id/imageView23"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
-
-    <ImageView
-        android:id="@+id/imageView24"
-        android:layout_width="98dp"
-        android:layout_height="95dp"
-        android:src="@mipmap/collection_locked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
