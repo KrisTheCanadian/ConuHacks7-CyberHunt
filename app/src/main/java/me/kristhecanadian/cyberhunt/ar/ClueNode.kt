@@ -46,12 +46,13 @@ class ClueNode(
             .setView(context, R.layout.place_view)
             .build()
             .thenAccept { renderable ->
+                renderable.isShadowCaster = true
                 setRenderable(renderable)
                 placeRenderable = renderable
 
                 place?.let {
                     textViewPlace = renderable.view.findViewById(R.id.placeName)
-                    textViewPlace?.text = "Email Phishing"
+                    textViewPlace?.text = "Clue"
                 }
             }
     }

@@ -8,6 +8,9 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.Location
+import android.location.Location.distanceBetween
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +27,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.ar.core.Pose
 import com.google.ar.sceneform.AnchorNode
 import me.kristhecanadian.cyberhunt.R
 import me.kristhecanadian.cyberhunt.api.NearbyPlacesResponse
@@ -32,6 +36,7 @@ import me.kristhecanadian.cyberhunt.ar.ClueNode
 import me.kristhecanadian.cyberhunt.ar.PlacesArFragment
 import me.kristhecanadian.cyberhunt.databinding.FragmentArBinding
 import me.kristhecanadian.cyberhunt.model.Clues
+import me.kristhecanadian.cyberhunt.model.GeometryLocation
 import me.kristhecanadian.cyberhunt.model.getPositionVector
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,6 +68,8 @@ class ArFragment : Fragment(), SensorEventListener {
 
     private var _binding: FragmentArBinding? = null
 
+    private var hasBeenInitialized = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -82,12 +89,84 @@ class ArFragment : Fragment(), SensorEventListener {
         placesService = PlacesService.create()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        // check for user movement and update the ar scene
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            // ask for permission
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+            return viewOfLayout
+        }
+        locationManager.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER,
+            1000,
+            0f,
+            object : LocationListener {
+                override fun onLocationChanged(location: Location) {
+                    currentLocation = location
+                    updateArScene()
+                }
+
+                override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+                    // do nothing
+                }
+
+                override fun onProviderEnabled(provider: String) {
+                    // do nothing
+                }
+
+                override fun onProviderDisabled(provider: String) {
+                    // do nothing
+                }
+            })
+
+
 
         setUpAr()
         setUpMaps()
 
+        if (currentLocation != null) {
+            updateArScene()
+        }
 
         return viewOfLayout
+    }
+
+    private fun updateArScene() {
+        // update the ar scene
+        val anchor = arFragment.arSceneView.session?.createAnchor(
+            Pose.makeTranslation(
+                currentLocation!!.latitude.toFloat(),
+                currentLocation!!.longitude.toFloat(),
+                0f
+            )
+        )
+
+        anchorNode = AnchorNode(anchor)
+        anchorNode?.setParent(arFragment.arSceneView.scene)
+
+        addClues(anchorNode!!)
+        hasBeenInitialized = true
+
+        Log.d(TAG, "Current location: ${currentLocation!!.latitude}, ${currentLocation!!.longitude}")
     }
 
     override fun onResume() {
@@ -115,11 +194,17 @@ class ArFragment : Fragment(), SensorEventListener {
 
     private fun setUpAr() {
         arFragment.setOnTapArPlaneListener { hitResult, _, _ ->
+            if(hasBeenInitialized) {
+                Log.d(TAG, "Clues already planted")
+                return@setOnTapArPlaneListener
+            }
+
             val anchor = hitResult.createAnchor()
             anchorNode = AnchorNode(anchor)
             anchorNode?.setParent(arFragment.arSceneView.scene)
 
             addClues(anchorNode!!)
+            hasBeenInitialized = true
         }
     }
 
@@ -137,14 +222,30 @@ class ArFragment : Fragment(), SensorEventListener {
         }
 
         for (clues in cluesList ) {
-            // Add the place in AR
-            val placeNode = ClueNode(requireActivity().applicationContext, clues)
-            placeNode.setParent(anchorNode)
-            placeNode.localPosition = clues.getPositionVector(orientationAngles[0], currentLocation.latLng)
-            placeNode.setOnTapListener { _, _ ->
-                showInfoWindow(clues)
+
+            val userLocation = getUserPosition()
+
+            if (userLocation == null) {
+                Log.w(TAG, "User location has not been determined yet")
+                return
             }
 
+            val distance = distanceBetween(userLocation, clues.geometry.location)
+
+            if (distance < 100) {
+                // log the clue
+                Log.d(TAG, "Clue planted: ${clues.name}")
+                // Add the place in AR
+                val node = ClueNode(requireActivity().applicationContext, clues)
+                node.setParent(anchorNode)
+
+                node.localPosition = clues.getPositionVector(orientationAngles[0], currentLocation.latLng)
+                node.setOnTapListener { _, _ ->
+                    showInfoWindow(clues)
+                }
+            }
+
+            Log.d(TAG, "Clue too far but added to map: ${clues.name}")
 
             // Add the place in maps
             map?.let {
@@ -159,6 +260,53 @@ class ArFragment : Fragment(), SensorEventListener {
                 }
             }
         }
+    }
+
+    private fun distanceBetween(userLocation: Location, cluesLocation: GeometryLocation): Float {
+        val distance = FloatArray(1)
+        distanceBetween(
+            userLocation.latitude,
+            userLocation.longitude,
+            cluesLocation.lat,
+            cluesLocation.lng,
+            distance
+        )
+        return distance[0]
+    }
+
+    private fun getUserPosition(): Location? {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            // request the permission
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+
+            return null
+        }
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                currentLocation = location
+                Log.d(TAG, "Location: $location")
+            }
+
+        return currentLocation;
     }
 
     private fun showInfoWindow(place: Clues) {
